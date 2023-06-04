@@ -35,8 +35,8 @@ namespace Side_Scrolling_Game_MOO_ICT
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(comboBox1.SelectedItem.ToString());
-            Form1 form1 = new Form1();
+            //MessageBox.Show(comboBox1.SelectedItem.ToString());
+            Form1 form1 = new Form1(comboBox1.SelectedItem.ToString());
             form1.Show();
             this.Hide();
         }

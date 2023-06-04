@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
 
 namespace Side_Scrolling_Game_MOO_ICT
 {
@@ -24,11 +25,13 @@ namespace Side_Scrolling_Game_MOO_ICT
         int backgroundSpeed = 8;
 
 
-
-        public Form1()
+        private string user { get; set; }
+        private string strConnection = "Data Source = usersdb.sqlite3";
+        public Form1(string user)
         {
             InitializeComponent();
             //txtScore.Parent = background;
+            this.user = user;
         }
 
         private void MainTimerEvent(object sender, EventArgs e)
@@ -167,7 +170,7 @@ namespace Side_Scrolling_Game_MOO_ICT
 
         private void RestartGame()
         {
-            Form1 newWindow = new Form1();
+            Form1 newWindow = new Form1(user);
             newWindow.Show();
             this.Hide();
         }
@@ -195,6 +198,19 @@ namespace Side_Scrolling_Game_MOO_ICT
 
 
 
+        }
+
+        private void CheckHigherScore()
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
     }
