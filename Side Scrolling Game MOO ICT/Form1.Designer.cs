@@ -70,6 +70,8 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.background = new System.Windows.Forms.PictureBox();
+            this.lblHighestScore = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox32)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox34)).BeginInit();
@@ -121,6 +123,8 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImage = global::Side_Scrolling_Game_MOO_ICT.Properties.Resources.background;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.lblHighestScore);
             this.panel1.Controls.Add(this.txtScore);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -545,6 +549,28 @@
             this.background.TabIndex = 0;
             this.background.TabStop = false;
             // 
+            // lblHighestScore
+            // 
+            this.lblHighestScore.AutoSize = true;
+            this.lblHighestScore.BackColor = System.Drawing.Color.Transparent;
+            this.lblHighestScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHighestScore.Location = new System.Drawing.Point(3, 2);
+            this.lblHighestScore.Name = "lblHighestScore";
+            this.lblHighestScore.Size = new System.Drawing.Size(76, 20);
+            this.lblHighestScore.TabIndex = 6;
+            this.lblHighestScore.Text = "Score: 0";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(264, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 20);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Score: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -593,6 +619,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Slide Scrolling Game MOO ICT";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CloseGame);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyIsUp);
             this.panel1.ResumeLayout(false);
@@ -683,6 +710,8 @@
         private System.Windows.Forms.Label txtScore;
         private System.Windows.Forms.Timer GameTimer;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblHighestScore;
+        private System.Windows.Forms.Label label1;
     }
 }
 

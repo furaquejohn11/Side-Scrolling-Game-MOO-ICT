@@ -27,6 +27,7 @@ namespace Side_Scrolling_Game_MOO_ICT
 
         private string user { get; set; }
         private string strConnection = "Data Source = usersdb.sqlite3";
+        private static int highestScore = 0;
         public Form1(string user)
         {
             InitializeComponent();
@@ -113,7 +114,9 @@ namespace Side_Scrolling_Game_MOO_ICT
 
             if (player.Bounds.IntersectsWith(door.Bounds) && hasKey == true)
             {
+                NewHigherScore();
                 door.Image = Properties.Resources.door_open;
+                
                 GameTimer.Stop();
                 MessageBox.Show("Well done, your Journey is complete! " + Environment.NewLine + "Click OK to play again");
                 RestartGame();
@@ -121,7 +124,9 @@ namespace Side_Scrolling_Game_MOO_ICT
 
             if (player.Top + player.Height > this.ClientSize.Height)
             {
+                NewHigherScore();
                 GameTimer.Stop();
+                
                 MessageBox.Show("You Died!" + Environment.NewLine + "Click OK to play again");
                 RestartGame();
             }
@@ -165,7 +170,16 @@ namespace Side_Scrolling_Game_MOO_ICT
 
         private void CloseGame(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            FormHome formHome = new FormHome();
+            formHome.Show();
+            
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            UserHighestScore();
+            label1.Text = user;
         }
 
         private void RestartGame()
@@ -200,17 +214,66 @@ namespace Side_Scrolling_Game_MOO_ICT
 
         }
 
-        private void CheckHigherScore()
+        private void UserHighestScore()
         {
             try
             {
+                using (var con = new SQLiteConnection(strConnection))
+                {
+                    con.Open();
 
+                    string query = "SELECT * FROM tblUsers WHERE users = @users";
+
+                    using (var command = new SQLiteCommand(query, con))
+                    {
+                        command.Parameters.AddWithValue("@users", user);
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                highestScore = Convert.ToInt32(reader["scores"]);
+                                lblHighestScore.Text = "Highest Score: " + highestScore;
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception)
             {
 
                 throw;
             }
+        }
+
+        private void NewHigherScore()
+        {
+            try
+            {
+                if (score > highestScore)
+                {
+                    using (var con = new SQLiteConnection(strConnection))
+                    {
+                        con.Open();
+
+                        string query = "UPDATE tblUsers SET scores = @scores WHERE users = @users";
+
+                        using (var command = new SQLiteCommand( query, con))
+                        {
+                            command.Parameters.AddWithValue("@users", user);
+                            command.Parameters.AddWithValue("@scores", score);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
     }
